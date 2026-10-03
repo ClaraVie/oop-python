@@ -1,12 +1,40 @@
-# class variables = shared among all instances of a class
-#                   defined outside the constructor
-#                   allow you to share data among all objects created from that class
+# Inheritance = Allows a class to inherit attributes from another class
+#               Helps with code reusability and extensibility
+#               class Chlid(Parent)
 
-from car import Car
+class Animal:
+    def __init__(self, name):
+        self.name = name
+        self.isAlive = True
 
-car1 = Car("Mustang", 1980, "red", False)
-car2 = Car("Corvette", 1978, "blue", True)
-car3 = Car("Charger", 2011, "yellow", True)
+    def eat(self):
+        print(f"{self.name} is eating")
 
-print(f"Total de objetos: {Car.num_cars}")
-print(f"Ano de aquisição: {Car.acquisition_year}")
+    def sleep(self):
+        self.sleep = print(f"{self.name} is sleeping")
+
+
+class Dog(Animal):
+    def speak(self):
+        print("WOOF")
+
+class Cat(Animal):
+    def speak(self):
+        print("MEOW")
+
+class Mouse(Animal):
+    def speak(self):
+        print("SQUEEK")
+
+dog = Dog("Scooby")
+cat = Cat("Garfield")
+mouse = Mouse("Mickey")
+
+# print(dog.name)
+# print(dog.isAlive)
+# dog.eat()
+# dog.sleep()
+
+dog.speak()
+cat.speak()
+mouse.speak()
