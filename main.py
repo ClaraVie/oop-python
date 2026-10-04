@@ -1,40 +1,41 @@
-# Inheritance = Allows a class to inherit attributes from another class
-#               Helps with code reusability and extensibility
-#               class Chlid(Parent)
+# multiple inheritance = inherit from more than one parent class
+#                          C(A, B)
+# C is a child of A and B
+
+# multilevel inheritance = inherit from a parent which inherits from another parent
+#                          C(B) <- B(A) <- A
+
 
 class Animal:
     def __init__(self, name):
         self.name = name
-        self.isAlive = True
 
     def eat(self):
         print(f"{self.name} is eating")
 
     def sleep(self):
-        self.sleep = print(f"{self.name} is sleeping")
+        print(f"{self.name} is sleeping")
 
 
-class Dog(Animal):
-    def speak(self):
-        print("WOOF")
+class Prey(Animal):
+    def flee(self):
+        print(f"{self.name} is fleeing")
 
-class Cat(Animal):
-    def speak(self):
-        print("MEOW")
+class Predator(Animal):
+    def hunt(self):
+        print(f"{self.name} is hunting")
 
-class Mouse(Animal):
-    def speak(self):
-        print("SQUEEK")
+class Rabbit(Prey):
+    pass
 
-dog = Dog("Scooby")
-cat = Cat("Garfield")
-mouse = Mouse("Mickey")
+class Hawk(Predator):
+    pass
 
-# print(dog.name)
-# print(dog.isAlive)
-# dog.eat()
-# dog.sleep()
+class Fish(Prey, Predator):
+    pass
 
-dog.speak()
-cat.speak()
-mouse.speak()
+rabbit = Rabbit("Bugs")
+hawk = Hawk("Tony")
+fish = Fish("Nemo")
+
+hawk.hunt()
