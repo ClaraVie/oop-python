@@ -1,50 +1,55 @@
-# Abstract class: A class that cannot be instantiated on its own; Meant to be subclassed.
-#                   They can contain abstract methods, wich are declared but have no implementation.
-#                   Abstract class benefits:
-#                   1. Prevents instatiation of the class itself
-#                   2. Requires children to use inheritance abstract methods
+# super() = Function used in a child class to call methods from a parent class
+#           Allows you to extend the functionality of the inherited methods
 
-from abc import ABC, abstractmethod
+class Shape:
+    def __init__(self, color, is_filled):
+        self.color = color
+        self.is_filled = is_filled
 
-class Vehicle(ABC):
+    def describe(self):
+        print(f"It is {self.color} and {'filled' if self.is_filled else 'not filled'}")
 
-    @abstractmethod # decorator
-    def go(self):
-        pass
+class Circle(Shape):
+    def __init__(self, color, is_filled, radius):
+        super().__init__(color, is_filled)
+        self.radius = radius
 
-    @abstractmethod
-    def stop(self):
-        pass
+    def describe(self) -> None:
+        print(f"Circle with an area of {3.14 * self.radius ** 2}cm²")
+        super().describe()
 
-class Car(Vehicle):
-    def go(self):
-        print("You drive the car")
+class Square(Shape):
+    def __init__(self, color, is_filled, width):
+        super().__init__(color, is_filled)
+        self.width = width
 
-    def stop(self):
-        print("You stop the car")
+    def describe(self):
+        print(f"Square with an area of {self.width ** 2}cm²")
+        super().describe()
 
-class Motorcycle(Vehicle):
-    def go(self):
-        print("You ride the motorcycle")
+class Triangle(Shape):
+    def __init__(self, color, is_filled, height, width):
+        super().__init__(color, is_filled)
+        self.height = height
+        self.width = width
 
-    def stop(self):
-        print("You stop the motorcycle")
+    def describe(self):
+        print(f"Triangle with an area of {self.height * self.width / 2}cm²")
+        super().describe()
 
-class Boat(Vehicle):
-    def go(self):
-        print("You sail the boat")
+circle = Circle("red", True, 4)
+square = Square("blue", False, 6)
+triangle = Triangle("green", True, 4, 7)
 
-    def stop(self):
-        print("You anchor the boat")
+# print(square.color)
+# print(square.is_filled)
+# print(square.width)
 
-car = Car()
-car.go()
-car.stop()
+# print(triangle.color)
+# print(triangle.is_filled)
+# print(f"{triangle.height}cm")
+# print(f"{triangle.width}cm")
 
-motorcycle = Motorcycle()
-motorcycle.go()
-motorcycle.stop()
-
-boat = Boat()
-boat.go()
-boat.stop()
+circle.describe()
+square.describe()
+triangle.describe()
