@@ -1,38 +1,26 @@
-from abc import ABC, abstractmethod
+# # Duck typing = Another way to achieve polymorphism besides Inheritance
+#                 Object msut have minimum necessary attributes/methods
+#                 "If it look like a duck and quacks like a duck, it mus be a duck"
 
-class Shape():
-    @abstractmethod
-    def area(self):
-        pass
+class Animal:
+    alive = True
 
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
+class Dog(Animal):
+    def speak(self):
+        print("WOOF")
 
-    def area(self):
-        return 3.14 * (self.radius ** 2)
+class Cat(Animal):
+    def speak(self):
+        print("MEOW")
 
-class Square(Shape):
-    def __init__(self, side):
-        self.side = side
+class Car(Animal):
+    alive = False
 
-    def area(self):
-        return self.side ** 2
+    def speak(self):
+        print("HONK")
 
-class Triangle(Shape):
-    def __init__(self, base, height):
-        self.base = base
-        self.height = height
+animals = [Dog(), Cat(), Car()]
 
-    def area(self):
-        return self.base * self.height / 2
-
-class Pizza(Circle):
-    def __init__(self, topping, radius):
-        super().__init__(radius)
-        self.topping = topping
-
-shapes = [Circle(4), Square(5), Triangle(6, 7), Pizza("pepperoni", 15)]
-
-for shape in shapes:
-    print(f"{shape.area()}cm²")
+for animal in animals:
+    animal.speak()
+    print(animal.alive)
