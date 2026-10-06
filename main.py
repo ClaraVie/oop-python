@@ -1,29 +1,44 @@
-# Aggregation = A relationship where one object contais references to other INDEPENDENT objects
-#                 "has-a" relationship
+# Nested class = A class defined within another class
+#                class Outer:
+#                     class Inner:
 
-# Composition = The composed object directly owns its components, wich cannot exist independently
-#               "owns-a" relationship
+# Benefits: Allows you to logically group classes that are closely related
+#           Encapsulates private details that aren't relevant outside of the outer class
+#           Keeps the namespace clean; reduces the possibility od naming conflicts
 
-class Engine():
-    def __init__(self, horse_power):
-        self.horse_power = horse_power
+class Company:
+    class Employee:
+        def __init__(self, name, position):
+            self.name = name
+            self.position = position
 
-class Wheel:
-    def __init__(self, size):
-        self.size = size
+        def get_details(self):
+            return f"Name: {self.name} \tPosition: {self.position}"
 
-class Car:
-    def __init__(self, make, model, horse_power, wheel_size):
-        self.make = make
-        self.model = model
-        self.engine = Engine(horse_power)
-        self.wheels = [Wheel(wheel_size) for wheel in range(4)]
+    def __init__(self, company_name):
+        self.company_name = company_name
+        self.employees = []
 
-    def display_car(self):
-        return f"{self.make} {self.model} {self.engine.horse_power}(hp) {self.wheels[0].size}"
+    def add_employee(self, name, position):
+        new_employee = self.Employee(name, position)
+        self.employees.append(new_employee)
 
-car = Car("Ford", "Mustang", 500, 18)
-car2 = Car ("Chevrolet", "Corvette", 670, 19)
+    def list_employees(self):
+        for employee in self.employees:
+            print(employee.get_details())
 
-print(car.display_car())
-print(car2.display_car())
+company = Company("Krusty Krab")
+company2 = Company("Chum Bucket")
+
+company.add_employee("Eugene", "Manager")
+company.add_employee("Spongebob", "Cook")
+company.add_employee("Squidward", "Cashier")
+
+company2.add_employee("Sheldon", "Manager")
+company2.add_employee("Karen", "Assistant")
+
+print(company.company_name)
+company.list_employees()
+
+print(company2.company_name)
+company2.list_employees()
